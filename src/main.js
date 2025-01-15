@@ -1,7 +1,17 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import { Modal } from 'ant-design-vue'
+import {
+    Modal,
+    Form,
+    Input,
+    Button,
+    FormModel,
+    message,
+    Tabs,
+    Space,
+    Checkbox
+} from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import App from './App'
 import router from './router'
@@ -19,7 +29,13 @@ import langPack from './assets/language_package'
 
 // 全局注册 Modal 组件
 Vue.use(Modal)
-
+Vue.use(Form)
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(FormModel)
+Vue.use(Tabs)
+Vue.use(Space)
+Vue.use(Checkbox)
 Vue.prototype.langPack = langPack;
 Vue.prototype.setLang = function (currentLangIndex) {
     //获取本地偏好语言函数
@@ -43,5 +59,8 @@ new Vue({
     components: { App },
     template: '<App/>'
 })
+
+// 挂载全局方法
+Vue.prototype.$message = message
 
 

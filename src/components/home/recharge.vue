@@ -11,7 +11,7 @@
         <!--游戏列表-->
         <section class="list container">
             <div class="row">
-                <div class="col-xs-6 col-sm-4 col-md-3" v-for="(v, i) in initData" :key="i">
+                <div class="col-xs-6 col-sm-5 col-md-4" v-for="(v, i) in initData" :key="i">
                     <div class="game-card">
                         <div class="game-image">
                             <img :src="v.imgURL" alt="" class="ec-bounce-in-l">
@@ -121,8 +121,8 @@ export default {
                 margin-bottom: 15px;
 
                 img {
-                    width: 100px;
-                    height: 100px;
+                    width: 120px;
+                    height: 120px;
                     border-radius: 16px;
                 }
             }
@@ -132,7 +132,6 @@ export default {
                 top: -50px;
                 font-size: 20px;
                 color: #333;
-                margin-bottom: 15px;
                 font-weight: 500;
             }
 

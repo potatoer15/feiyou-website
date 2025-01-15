@@ -2,136 +2,155 @@
 	<div class="my-nav">
 		<div class="bx">
 			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-							data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">
-							<img src="../../../static/img/logo.png" alt="">
-						</a>
-					</div>
+				<!-- 导航头部 -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<router-link class="navbar-brand" to="/">
+						<img src="../../../static/img/logo.png" alt="logo">
+					</router-link>
+				</div>
 
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav items">
-							<!--首页-->
-							<li class="" index='0'><router-link to="/index"><i class="fa fa-home"></i>
-									{{ $store.state.langPack.header.home }}</router-link></li>
-							<!--游戏-->
-							<li class="" index='1'><router-link to="/games"><i class="fa fa-gamepad"></i>
-									{{ $store.state.langPack.header.games }}</router-link></li>
-							<!-- 充值 -->
-							<li class="" index='2'><router-link to="/recharge"><i class="fa fa-money"></i>
-									{{ $store.state.langPack.header.recharge }}</router-link></li>
-							<!--加入我们-->
-							<li index='3'><router-link to="/careers"><i class="fa fa-flag"></i>
-									{{ $store.state.langPack.header.careers }}</router-link></li>
-							<!--关于我们-->
-							<li index='4'><router-link to="/about"><i class="fa fa-user"></i>
-									{{ $store.state.langPack.header.about }}</router-link></li>
-						</ul>
-						<!--<form class="navbar-form navbar-left">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>-->
-						<ul class="nav navbar-nav navbar-right">
+				<!-- 导航内容 -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<!-- 主导航菜单 -->
+					<ul class="nav navbar-nav items">
+						<li v-for="(item, index) in navItems" :key="index" :index="index"
+							:class="{ active: currentPath === item.path }">
+							<router-link :to="item.path">
+								<i :class="item.icon"></i>
+								{{ $store.state.langPack.header[item.label] }}
+							</router-link>
+						</li>
+					</ul>
+
+					<!-- 右侧菜单 -->
+					<ul class="nav navbar-nav navbar-right">
+						<!-- 社交媒体链接 -->
+						<!-- <li>
+							<ul class="link">
+								<li v-for="(social, index) in socialLinks" :key="index">
+									<a :href="social.url" :target="social.target">
+										<img :src="social.icon" :alt="social.name" />
+									</a>
+								</li>
+							</ul>
+						</li> -->
+
+						<!-- 语言选择 -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								{{ $store.state.langPack.header.language }}
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li v-for="(lang, index) in languages" :key="index">
+									<a href="#" @click="setLang(lang.value)">
+										{{ $store.state.langPack.header[lang.label] }}
+									</a>
+								</li>
+								<li v-for="(lang, index) in languages.slice(0, -1)" :key="`divider-${index}`"
+									class="divider">
+								</li>
+							</ul>
+						</li>
+
+						<!-- 登录状态 -->
+						<template v-if="isLoggedIn">
+							<li class="user-info">
+								<span>{{ $store.state.userInfo.nickName }}</span>
+								<a-button type="link" @click="handleLogout">退出</a-button>
+							</li>
+						</template>
+						<template v-else>
 							<li>
-								<ul class="link">
-									<li>
-										<router-link to=""><img src="../../../static/img/youtube.png" /></router-link>
-									</li>
-									<li>
-										<a href="https://www.facebook.com/gameflask/" target="_blank"><img
-												src="../../../static/img/facebook.png" /></a>
-									</li>
-									<li>
-										<router-link to=""><img src="../../../static/img/twitter.jpg" /></router-link>
-									</li>
-									<li>
-										<router-link to=""><img src="../../../static/img/google.jpg" /></router-link>
-									</li>
-								</ul>
+								<a href="#" @click="showLoginModal" class="login-container">
+									登录
+								</a>
 							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-									aria-haspopup="true" aria-expanded="false">{{ $store.state.langPack.header.language
-									}}
-									<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<!--<li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>-->
-									<li><a href="#" @click="setLang('2')">{{ $store.state.langPack.header.english }}</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#" @click="setLang('1')">{{ $store.state.langPack.header.zh_hk }}</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#" @click="setLang('0')">{{ $store.state.langPack.header.zh_cn }}</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div><!-- /.navbar-collapse -->
-				</div><!-- /.container-fluid -->
+						</template>
+					</ul>
+				</div>
 			</nav>
 		</div>
 
-
+		<!-- 使用新的登录组件 -->
+		<login-modal :visible.sync="loginVisible" @login-success="handleLoginSuccess" />
 	</div>
 </template>
 
 <script>
+import LoginModal from './LoginModal.vue'
+import { getState } from '../../store/store'
 export default {
+	name: 'VHeader',
+
+	components: {
+		LoginModal
+	},
+
 	data() {
 		return {
-			//   路由path与activeIndex映射
-			routeMap: {
-				'0': '/index',
-				'1': '/games',
-				'2': '/recharge',
-				'3': '/careers',
-				'4': '/about',
-			}
+			navItems: [
+				{ path: '/index', icon: 'fa fa-home', label: 'home' },
+				{ path: '/games', icon: 'fa fa-gamepad', label: 'games' },
+				{ path: '/recharge', icon: 'fa fa-money', label: 'recharge' },
+				{ path: '/careers', icon: 'fa fa-flag', label: 'careers' },
+				{ path: '/about', icon: 'fa fa-user', label: 'about' }
+			],
+			socialLinks: [
+				{ name: 'youtube', icon: require('../../../static/img/youtube.png'), url: '', target: '_blank' },
+				{ name: 'facebook', icon: require('../../../static/img/facebook.png'), url: 'https://www.facebook.com/gameflask/', target: '_blank' },
+				{ name: 'twitter', icon: require('../../../static/img/twitter.jpg'), url: '', target: '_blank' },
+				{ name: 'google', icon: require('../../../static/img/google.jpg'), url: '', target: '_blank' }
+			],
+			languages: [
+				{ value: '2', label: 'english' },
+				{ value: '1', label: 'zh_hk' },
+				{ value: '0', label: 'zh_cn' }
+			],
+			loginVisible: false,
 		}
 	},
-	mounted() {
-		this.chengePath();
-	},
-	methods: {
 
-		//根据路由path改变activeIndex
-		chengePath() {
-			let path = this.$route.path;
-			for (let key in this.routeMap) {
-				if (path.indexOf(this.routeMap[key]) != -1) {
-					this.setNavStyle(key)
-				}
-			}
+	computed: {
+		currentPath() {
+			return this.$route.path
 		},
-		setNavStyle(index) {
-			if (!document.querySelectorAll('ul.navbar-nav.items>li')) return;
-			document.querySelectorAll('ul.navbar-nav.items>li').forEach(v => {
-				if (v.getAttribute('index') == index) {
-					v.classList.add('active')
-				} else {
-					v.classList.remove('active')
-				}
-			})
+		isLoggedIn() {
+			return !!getState('userInfo.nickName')
+		},
+		userName() {
+			return getState('userInfo.nickName')
+		},
+		currentLang() {
+			return getState('langPack.header.language')
 		}
 	},
-	watch: {
-		'$route.path': 'chengePath'
-	},
-	created() {
+
+	methods: {
+		showLoginModal() {
+			this.loginVisible = true
+		},
+
+		handleLoginSuccess() {
+			this.loginVisible = false
+		},
+
+		handleLogout() {
+			this.$store.commit('clearUserInfo')
+			this.$message.success('已退出登录')
+		},
+
+		// 语言切换
+		setLang(lang) {
+			this.$store.commit('setLang', lang)
+		}
 	}
 }
 </script>
@@ -237,6 +256,26 @@ export default {
 
 		ul.link {
 			height: 70px;
+		}
+	}
+
+	.login-container {
+		margin-left: 40px;
+	}
+
+	.login-btn {
+		font-size: 14px;
+	}
+
+	.user-info {
+		padding: 16px 20px;
+		margin-left: 40px;
+		display: flex;
+		align-items: center;
+		color: #fff;
+
+		span {
+			font-size: 14px;
 		}
 	}
 }

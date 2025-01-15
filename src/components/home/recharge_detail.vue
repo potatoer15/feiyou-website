@@ -15,12 +15,12 @@
                 </div>
 
                 <div class="recharge-options">
-                    <div class="recharge-tier" v-for="tier in rechargeTiers" :key="tier.id">
+                    <div class="recharge-goods" v-for="goods in goodsList" :key="goods.id">
                         <div class="product-info">
-                            <img :src="tier.image" alt="" class="product-image">
-                            <div class="product-name">{{ tier.name }}</div>
-                            <div class="price">¥ {{ tier.price }}</div>
-                            <button class="recharge-button" @click="handleRecharge(tier)">
+                            <img :src="goods.image || defaultImage" :alt="goods.name" class="product-image">
+                            <div class="product-name">{{ goods.name }}</div>
+                            <div class="price">¥ {{ goods.price }}</div>
+                            <button class="recharge-button" @click="handleRecharge(goods)">
                                 购买
                             </button>
                         </div>
@@ -29,7 +29,9 @@
             </div>
 
             <!-- 支付弹窗 -->
-            <a-modal v-model:visible="isModalVisible" title="支付订单" @cancel="handleCancel" width="700px">
+            <a-modal v-model:visible="isModalVisible" title="支付订单" @cancel="handleCancel" width="700px" :footer="false"
+                :header="false">
+
                 <div class="order-info">
                     <div class="order-header">
                         <div class="order-no">订单编号 #{{ currentOrder.orderId }}</div>
@@ -38,12 +40,12 @@
                     <div class="order-details">
                         <div class="detail-item">
                             <span>订单金额</span>
-                            <span>¥ {{ currentOrder.amount }} 元</span>
+                            <span>¥ {{ currentOrder.money }} 元</span>
                         </div>
                         <div class="detail-item">
                             <span>购买点数</span>
                             <span class="points-value">
-                                {{ currentOrder.points }}
+                                {{ currentOrder.coupon }}
                             </span>
                         </div>
                     </div>
@@ -57,132 +59,153 @@
 </template>
 
 <script>
+import rechargeApi from '@/api/recharge'
+
 export default {
     name: 'RechargeDetail',
     data() {
         return {
             gameId: '',
-            rechargeTiers: [
-                {
-                    id: 1,
-                    name: '无名客的荣勋',
-                    price: 68,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 68
-                },
-                {
-                    id: 2,
-                    name: '无名客的奖章',
-                    price: 128,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 128
-                },
-                {
-                    id: 3,
-                    name: '列车补给凭证',
-                    price: 30,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 30
-                },
-                {
-                    id: 4,
-                    name: '60古老梦华',
-                    price: 6,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 60
-                },
-                {
-                    id: 5,
-                    name: '300古老梦华',
-                    price: 30,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-
-                    points: 300
-                },
-                {
-                    id: 6,
-                    name: '980古老梦华',
-                    price: 98,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 980
-                },
-                {
-                    id: 7,
-                    name: '1980古老梦华',
-                    price: 198,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 1980
-                },
-                {
-                    id: 8,
-                    name: '3280古老梦华',
-                    price: 328,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 3280
-                },
-                {
-                    id: 9,
-                    name: '6480古老梦华',
-                    price: 648,
-                    image: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-                    points: 6480
-                }
-            ],
+            goodsList: [],
             isModalVisible: false,
             currentOrder: {
                 orderId: '',
-                amount: 0,
-                points: 0
+                money: 0,
+                coupon: 0
             },
             countdown: '',
             paymentUrl: '',
-            timer: null
+            timer: null,
+            defaultImage: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
+            countdownTimer: null
         }
     },
-    created() {
-        this.gameId = this.$route.params.gameId
+    async created() {
+        try {
+            this.gameId = this.$route.params.gameId
+            await this.fetchGoodsList()
+        } catch (error) {
+            console.error('初始化数据失败:', error)
+            this.$message.error('获取数据失败，请稍后重试')
+        }
     },
     methods: {
-        handleRecharge(tier) {
-            this.currentOrder = {
-                orderId: 'ORDER' + Date.now(),
-                amount: tier.price,
-                points: tier.points
+        // 获取商品列表
+        async fetchGoodsList() {
+            try {
+                this.goodsList = await rechargeApi.getGoodsList()
+            } catch (error) {
+                console.error('获取商品列表失败:', error)
+                throw error
             }
-            this.paymentUrl = '支付页面URL' // 实际项目中替换为真实的支付URL
-            this.isModalVisible = true
-            this.startCountdown(15 * 60) // 15分钟倒计时
         },
-        startCountdown(seconds) {
-            if (this.timer) clearInterval(this.timer)
+
+
+        // 处理充值请求
+        async handleRecharge(goods) {
+            try {
+                const order = await rechargeApi.createRechargeOrder(goods.goodsId)
+                const orderPage = await rechargeApi.getOrderPage(
+                    order.orderNo,
+                    order.name,
+                    order.money
+                )
+                this.currentOrder = order
+                this.calculateCountdown(order.expireTime)
+                this.isModalVisible = true
+                this.paymentUrl = orderPage
+
+                // 开始轮询订单状态
+                this.startPollingOrderStatus(order.orderId, order.expireTime)
+            } catch (error) {
+                console.error('创建订单失败:', error)
+                this.$message.error('创建订单失败，请稍后重试')
+            }
+        },
+
+        calculateCountdown(expireTime) {
+            // 清除可能存在的旧计时器
+            if (this.countdownTimer) {
+                clearInterval(this.countdownTimer)
+            }
 
             const updateCountdown = () => {
-                const minutes = Math.floor(seconds / 60)
-                const remainingSeconds = seconds % 60
-                this.countdown = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
+                // 将时间戳转换为毫秒
+                const end = parseInt(expireTime) * 1000
+                const now = new Date().getTime()
+                const diff = end - now
 
-                if (seconds <= 0) {
-                    clearInterval(this.timer)
-                    this.handleCancel()
+                if (diff <= 0) {
+                    this.countdown = '已过期'
+                    if (this.countdownTimer) {
+                        clearInterval(this.countdownTimer)
+                    }
+                    return
                 }
-                seconds--
+
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+                this.countdown = `${minutes}分${seconds}秒`
             }
 
+            // 立即执行一次
             updateCountdown()
-            this.timer = setInterval(updateCountdown, 1000)
+            // 设置定时器，每秒更新倒计时
+            this.countdownTimer = setInterval(updateCountdown, 1000)
         },
-        handleCancel() {
-            this.isModalVisible = false
+
+        // 轮询订单状态
+        async startPollingOrderStatus(orderId, expireTime) {
+            const endTime = parseInt(expireTime) * 1000
+            const interval = 5000 // 每5秒查询一次
+
+            this.timer = setInterval(async () => {
+                try {
+                    // 检查是否已过期
+                    if (Date.now() >= endTime) {
+                        this.stopPolling()
+                        if (this.isModalVisible) {
+                            this.$message.error('支付超时，请重新下单')
+                            this.isModalVisible = false
+                        }
+                        return
+                    }
+
+                    const orderInfo = await rechargeApi.getOrder(orderId)
+
+                    // 假设后端返回的订单状态 confirmStatus === '1' 表示支付成功
+                    if (orderInfo.confirmStatus === '1') {
+                        this.stopPolling()
+                        this.$message.success('支付成功')
+                        this.isModalVisible = false
+                        // 这里可以添加刷新用户余额等操作
+                    }
+                } catch (error) {
+                    console.error('查询订单状态失败:', error)
+                }
+            }, interval)
+        },
+
+        // 停止轮询
+        stopPolling() {
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
             }
+            if (this.countdownTimer) {
+                clearInterval(this.countdownTimer)
+                this.countdownTimer = null
+            }
+        },
+
+        handleCancel() {
+            this.isModalVisible = false
+            this.stopPolling()
+            this.$message.error('取消支付')
         }
     },
     beforeDestroy() {
-        if (this.timer) {
-            clearInterval(this.timer)
-        }
+        this.stopPolling()
     }
 }
 </script>
@@ -241,7 +264,7 @@ export default {
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
                 gap: 20px;
 
-                .recharge-tier {
+                .recharge-goods {
                     position: relative;
                     border: 1px solid #e8e8e8;
                     border-radius: 8px;
