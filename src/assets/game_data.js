@@ -1,4 +1,3 @@
-
 //首页信息
 const index = {
 
@@ -9,7 +8,7 @@ const index = {
             count: '10',
             unit: 'M+',
             type: ['注册玩家', '註冊玩家', 'Number of players'],
-            imgURL: '',
+            imgURL: require('../../static/img/icon_1.png'),
             bgColor: '#58bd95'
         },
         {
@@ -69,7 +68,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E9%8B%A4%E5%A4%A7d%E5%A4%A7%E4%BA%A8-%E6%9C%80%E5%88%BA%E6%BF%80%E7%9A%84%E7%AD%96%E7%95%A5%E6%A3%8B%E7%89%8C%E9%81%8A%E6%88%B2/id1295634408?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.gameflask.btthk',
         downloads: '50000+',
-        imgURL: './static/img/games/btthk_icon.jpg'
+        imgURL: require('../../static/img/games/btthk_icon.jpg')
     },
     fmj16: {
         gameKey: 'fmj16',
@@ -83,7 +82,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E9%BA%BB%E5%B0%8716%E5%BC%B5/id1252568150?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.funimax.funmahjong16',
         downloads: '50000+',
-        imgURL: './static/img/games/fmj16_icon.jpg'
+        imgURL: require('../../static/img/games/fmj16_icon.jpg')
     },
     fbt: {
         gameKey: 'fbt',
@@ -97,7 +96,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E9%8B%A4%E5%A4%A7d/id1247782302?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funbigtwo',
         downloads: '50000+',
-        imgURL: './static/img/games/fbt_icon.jpg'
+        imgURL: require('../../static/img/games/fbt_icon.jpg')
     },
     fsh: {
         gameKey: 'fsh',
@@ -111,21 +110,21 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E6%A2%AD%E5%93%88/id1238318956?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funshowhand',
         downloads: '500k+',
-        imgURL: './static/img/games/fsh_icon.jpg'
+        imgURL: require('../../static/img/games/fsh_icon.jpg')
     },
     fbts: {
         gameKey: 'fbts',
         name: ['疯大老二', '瘋大老二', '瘋大老二'],
         subTitle: ['台灣人自製的撲克遊戲《瘋大老二》，MIT品質有保證', '台灣人自製的撲克遊戲《瘋大老二》，MIT品質有保證', '台灣人自製的撲克遊戲《瘋大老二》，MIT品質有保證'],
         info: [
-            '♠【华丽不夜城画风】仿如置身Las Vegas不夜城!<br/>♥【流畅爽快的节奏】打牌不顿挫，一路顺到底!<br/>♦【霸气的大牌特效】一出手就有王者风范!<br/>♣【智慧刁牌最贴心】把把出牌都精准到位!<br/>♠【免注册免等咖】等公车、等捷运随时都能”顺”一下!<br/>♥【没网路也爽爽打】纪录、战绩精准保留不漏失!<br/>♦【系统丰富多元】称号、成就、任务系统无一不缺，多功能的新体验。<br/>♣【胜局加码新玩法】独创新玩法，心脏够强，胆子够大者，等你来挑战。',
-            '♠【華麗不夜城畫風】仿如置身Las Vegas不夜城!<br/>♥【流暢爽快的節奏】打牌不頓挫，一路順到底!<br/>♦【霸氣的大牌特效】一出手就有王者風範!<br/>♣【智慧刁牌最貼心】把把出牌都精準到位!<br/>♠【免註冊免等咖】等公車、等捷運隨時都能”順”一下!<br/>♥【沒網路也爽爽打】紀錄、戰績精準保留不漏失!<br/>♦【系統豐富多元】稱號、成就、任務系統無一不缺，多功能的新體驗。<br/>♣【勝局加碼新玩法】獨創新玩法，心臟夠強，膽子夠大者，等你來挑戰。',
-            '♠【華麗不夜城畫風】仿如置身Las Vegas不夜城!<br/>♥【流暢爽快的節奏】打牌不頓挫，一路順到底!<br/>♦【霸氣的大牌特效】一出手就有王者風範!<br/>♣【智慧刁牌最貼心】把把出牌都精準到位!<br/>♠【免註冊免等咖】等公車、等捷運隨時都能”順”一下!<br/>♥【沒網路也爽爽打】紀錄、戰績精準保留不漏失!<br/>♦【系統豐富多元】稱號、成就、任務系統無一不缺，多功能的新體驗。<br/>♣【勝局加碼新玩法】獨創新玩法，心臟夠強，膽子夠大者，等你來挑戰。',
+            '♠【华丽不夜城画风】仿如置身Las Vegas不夜城!<br/>♥【流畅爽快的节奏】打牌不顿挫，一路顺到底!<br/>♦【霸气的大牌特效】一出手就有王者风范!<br/>♣【智慧刁牌最贴心】把把出牌都精准到位!<br/>♠【免注册免等咖】等公车、等捷运随时都能"顺"一下!<br/>♥【没网路也爽爽打】纪录、战绩精准保留不漏失!<br/>♦【系统丰富多元】称号、成就、任务系统无一不缺，多功能的新体验。<br/>♣【胜局加码新玩法】独创新玩法，心脏够强，胆子够大者，等你来挑战。',
+            '♠【華麗不夜城畫風】仿如置身Las Vegas不夜城!<br/>♥【流暢爽快的節奏】打牌不頓挫，一路順到底!<br/>♦【霸氣的大牌特效】一出手就有王者風範!<br/>♣【智慧刁牌最貼心】把把出牌都精準到位!<br/>♠【免註冊免等咖】等公車、等捷運隨時都能"順"一下!<br/>♥【沒網路也爽爽打】紀錄、戰績精準保留不漏失!<br/>♦【系統豐富多元】稱號、成就、任務系統無一不缺，多功能的新體驗。<br/>♣【勝局加碼新玩法】獨創新玩法，心臟夠強，膽子夠大者，等你來挑戰。',
+            '♠【華麗不夜城畫風】仿如置身Las Vegas不夜城!<br/>♥【流暢爽快的節奏】打牌不頓挫，一路順到底!<br/>♦【霸氣的大牌特效】一出手就有王者風範!<br/>♣【智慧刁牌最貼心】把把出牌都精準到位!<br/>♠【免註冊免等咖】等公車、等捷運隨時都能"順"一下!<br/>♥【沒網路也爽爽打】紀錄、戰績精準保留不漏失!<br/>♦【系統豐富多元】稱號、成就、任務系統無一不缺，多功能的新體驗。<br/>♣【勝局加碼新玩法】獨創新玩法，心臟夠強，膽子夠大者，等你來挑戰。',
         ],
         appleURL: 'https://itunes.apple.com/us/app/fun-big2-special/id1251326780?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funbig2_tw',
         downloads: '1M+',
-        imgURL: './static/img/games/fbts_icon.jpg'
+        imgURL: require('../../static/img/games/fbts_icon.jpg')
     },
     bjm: {
         gameKey: 'bjm',
@@ -139,7 +138,7 @@ const games = {
         appleURL: '',
         googleURL: 'https://play.google.com/store/apps/details?id=com.lavapot.bjm',
         downloads: '500k+',
-        imgURL: './static/img/games/bjm_icon.jpg'
+        imgURL: require('../../static/img/games/bjm_icon.jpg')
     },
 }
 
