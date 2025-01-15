@@ -69,7 +69,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E9%8B%A4%E5%A4%A7d%E5%A4%A7%E4%BA%A8-%E6%9C%80%E5%88%BA%E6%BF%80%E7%9A%84%E7%AD%96%E7%95%A5%E6%A3%8B%E7%89%8C%E9%81%8A%E6%88%B2/id1295634408?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.gameflask.btthk',
         downloads: '50000+',
-        imgURL: '../../../static/img/games/btthk_icon.jpg'
+        imgURL: '../../static/img/games/btthk_icon.jpg'
     },
     fmj16: {
         gameKey: 'fmj16',
@@ -83,7 +83,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E9%BA%BB%E5%B0%8716%E5%BC%B5/id1252568150?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.funimax.funmahjong16',
         downloads: '50000+',
-        imgURL: '../../../static/img/games/fmj16_icon.jpg'
+        imgURL: '../../static/img/games/fmj16_icon.jpg'
     },
     fbt: {
         gameKey: 'fbt',
@@ -97,7 +97,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E9%8B%A4%E5%A4%A7d/id1247782302?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funbigtwo',
         downloads: '50000+',
-        imgURL: '../../../static/img/games/fbt_icon.jpg'
+        imgURL: '../../static/img/games/fbt_icon.jpg'
     },
     fsh: {
         gameKey: 'fsh',
@@ -111,7 +111,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/%E7%98%8B%E6%A2%AD%E5%93%88/id1238318956?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funshowhand',
         downloads: '500k+',
-        imgURL: '../../../static/img/games/fsh_icon.jpg'
+        imgURL: '../../static/img/games/fsh_icon.jpg'
     },
     fbts: {
         gameKey: 'fbts',
@@ -125,7 +125,7 @@ const games = {
         appleURL: 'https://itunes.apple.com/us/app/fun-big2-special/id1251326780?mt=8',
         googleURL: 'https://play.google.com/store/apps/details?id=com.luckystargame.funbig2_tw',
         downloads: '1M+',
-        imgURL: '../../../static/img/games/fbts_icon.jpg'
+        imgURL: '../../static/img/games/fbts_icon.jpg'
     },
     bjm: {
         gameKey: 'bjm',
@@ -139,7 +139,7 @@ const games = {
         appleURL: '',
         googleURL: 'https://play.google.com/store/apps/details?id=com.lavapot.bjm',
         downloads: '500k+',
-        imgURL: '../../../static/img/games/bjm_icon.jpg'
+        imgURL: '../../static/img/games/bjm_icon.jpg'
     },
 }
 
