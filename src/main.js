@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import { Modal } from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 import App from './App'
 import router from './router'
 import store from './store/store'
@@ -14,28 +16,32 @@ import '../static/css/ec-css-animate.css'
 import '../static/css/ec-css-hover.css'
 //导入语言包
 import langPack from './assets/language_package'
-Vue.prototype.langPack = langPack; 
-Vue.prototype.setLang = function(currentLangIndex){
+
+// 全局注册 Modal 组件
+Vue.use(Modal)
+
+Vue.prototype.langPack = langPack;
+Vue.prototype.setLang = function (currentLangIndex) {
     //获取本地偏好语言函数
     let pack = {};
-    for(let k1 in this.langPack){
+    for (let k1 in this.langPack) {
         pack[k1] = {};
-        for(let k2 in this.langPack[k1]){
+        for (let k2 in this.langPack[k1]) {
             pack[k1][k2] = this.langPack[k1][k2][currentLangIndex];
         }
     }
-    this.$store.commit('setLanguage',pack);
-    localStorage.setItem('currentLangIndex',currentLangIndex); //语言索引存入当地
+    this.$store.commit('setLanguage', pack);
+    localStorage.setItem('currentLangIndex', currentLangIndex); //语言索引存入当地
 }
 
 Vue.config.productionTip = false
 
-
 new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>',
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>'
 })
+
 
