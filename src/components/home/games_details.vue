@@ -250,7 +250,7 @@ export default {
 	data() {
 		return {
 			initData: null, //当前游戏内容数据
-			langIndex: Number(localStorage.getItem('currentLangIndex') || '0'), //语言类型index
+			langIndex: 0, //语言类型index
 			gameKey: ''
 		}
 	},

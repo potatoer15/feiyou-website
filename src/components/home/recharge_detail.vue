@@ -93,7 +93,49 @@ export default {
         // 获取商品列表
         async fetchGoodsList() {
             try {
-                this.goodsList = await rechargeApi.getGoodsList()
+                // this.goodsList = await rechargeApi.getGoodsList()
+                this.goodsList = [
+                    {
+                        "goodsId": "1",
+                        "name": "¥18",
+                        "details": "AI 算力点150(约可生成5分钟的视频翻译内容);同一任务下执行次数没有限制;自定义字幕编辑;高速GPU算力池;算力点有效期1年;享受媒体库超大存储空间",
+                        "price": "0.01",
+                        "coupon": "150",
+                        "status": "1"
+                    },
+                    {
+                        "goodsId": "2",
+                        "name": "¥68",
+                        "details": "AI 算力点600(约可生成20分钟的视频翻译内容);同一任务下执行次数没有限制;自定义字幕编辑;高速GPU算力池;算力点有效期1年;享受媒体库超大存储空间",
+                        "price": "68.00",
+                        "coupon": "600",
+                        "status": "1"
+                    },
+                    {
+                        "goodsId": "3",
+                        "name": "¥128",
+                        "details": "AI 算力点1200(约可生成40分钟的视频翻译内容);同一任务下执行次数没有限制;自定义字幕编辑;高速GPU算力池;算力点有效期1年;享受媒体库超大存储空间",
+                        "price": "128.00",
+                        "coupon": "1200",
+                        "status": "1"
+                    },
+                    {
+                        "goodsId": "4",
+                        "name": "¥328",
+                        "details": "AI 算力点3300(约可生成110分钟的视频翻译内容);同一任务下执行次数没有限制;自定义字幕编辑;高速GPU算力池;算力点有效期1年;享受媒体库超大存储空间",
+                        "price": "328.00",
+                        "coupon": "3300",
+                        "status": "1"
+                    },
+                    {
+                        "goodsId": "5",
+                        "name": "¥648",
+                        "details": "AI 算力点8000(约可生成260分钟的视频翻译内容);同一任务下执行次数没有限制;自定义字幕编辑;高速GPU算力池;算力点有效期1年;享受媒体库超大存储空间",
+                        "price": "648.00",
+                        "coupon": "8000",
+                        "status": "1"
+                    }
+                ]
             } catch (error) {
                 console.error('获取商品列表失败:', error)
                 throw error

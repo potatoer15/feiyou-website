@@ -17,9 +17,6 @@ export default {
   components: {
     vHeader,
     vFooter
-  },
-  created() {
-    this.setLang(localStorage.getItem('currentLangIndex') || '1');
   }
 }
 </script>

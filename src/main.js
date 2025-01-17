@@ -24,8 +24,7 @@ import 'font-awesome/css/font-awesome.css'//字体图标样式
 //css3样式库
 import '../static/css/ec-css-animate.css'
 import '../static/css/ec-css-hover.css'
-//导入语言包
-import langPack from './assets/language_package'
+
 
 // 全局注册 Modal 组件
 Vue.use(Modal)
@@ -36,20 +35,6 @@ Vue.use(FormModel)
 Vue.use(Tabs)
 Vue.use(Space)
 Vue.use(Checkbox)
-Vue.prototype.langPack = langPack;
-Vue.prototype.setLang = function (currentLangIndex) {
-    //获取本地偏好语言函数
-    let pack = {};
-    for (let k1 in this.langPack) {
-        pack[k1] = {};
-        for (let k2 in this.langPack[k1]) {
-            pack[k1][k2] = this.langPack[k1][k2][currentLangIndex];
-        }
-    }
-    this.$store.commit('setLanguage', pack);
-    localStorage.setItem('currentLangIndex', currentLangIndex); //语言索引存入当地
-}
-
 Vue.config.productionTip = false
 
 new Vue({

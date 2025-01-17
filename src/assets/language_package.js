@@ -29,8 +29,8 @@ export default {
         codeOfUse: ['使用守则', '使用守則', 'Code of use'],
     },
     index: {
-        bestGameTitle: ['做最好的游戏', '做最好的遊戲', 'Make Best Games'],
-        bestGameInfo: ['我们专注于游戏开发及运营多年，用心为玩家度身订造出最好玩的游戏。我们目标不止做A级游戏，而是做出S级精品游戏', '我們專註於遊戲開發及運營多年，用心為玩家度身訂造出最好玩的遊戲。我們目標不止做A級遊戲，而是做出S級精品遊戲', 'We focus on game development and operation for many years! We are not only doing A grade games but S grade!'],
+        bestGameTitle: ['做最良心的卡牌', '做最好的遊戲', 'Make Best Games'],
+        bestGameInfo: ['超爽放置，一键挂机收菜，请大人准备好迎接这场刺激的卡牌大战，用智慧和勇气捍卫英雄的荣耀吧！', '我們專註於遊戲開發及運營多年，用心為玩家度身訂造出最好玩的遊戲。我們目標不止做A級遊戲，而是做出S級精品遊戲', 'We focus on game development and operation for many years! We are not only doing A grade games but S grade!'],
         dataTitle: ['我们用数据说话', '我們用數據說話', 'About Statistics'],
         userCommentTitle: ['来自用户的评价', '來自用戶的評價', 'Review from our Gamers'],
         type: ['注册玩家', '註冊玩家', 'Number of players']

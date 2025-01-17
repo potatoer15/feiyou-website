@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+//导入语言包
+import lang from '../assets/language_package'
 Vue.use(Vuex);
 
 /**
@@ -25,6 +26,16 @@ const getLocalState = (key) => {
         return undefined
     }
 }
+const pack = {}
+for (let k1 in lang) {
+    pack[k1] = {};
+    console.log(k1);
+    console.log(lang[k1]);
+    for (let k2 in lang[k1]) {
+        pack[k1][k2] = lang[k1][k2][0];
+    }
+}
+console.log(pack);
 
 // 保存状态到本地存储
 const saveState = (key, value) => {
@@ -37,7 +48,7 @@ const saveState = (key, value) => {
 
 const state = {
     modalLogin: false,
-    langPack: getLocalState('langPack'),
+    langPack: pack,
     token: getLocalState('token'),
     userInfo: getLocalState('userInfo')
 }
@@ -45,10 +56,6 @@ const state = {
 const mutations = {
     setModalLogin(state, value) {
         state.modalLogin = value;
-    },
-    setLanguage(state, languagePackage) {
-        state.langPack = languagePackage;
-        saveState('langPack', languagePackage);
     },
     setToken(state, token) {
         state.token = token;

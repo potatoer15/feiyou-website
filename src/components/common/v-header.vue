@@ -41,25 +41,6 @@
 								</li>
 							</ul>
 						</li> -->
-
-						<!-- 语言选择 -->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								{{ $store.state.langPack.header.language }}
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li v-for="(lang, index) in languages" :key="index">
-									<a href="#" @click="setLang(lang.value)">
-										{{ $store.state.langPack.header[lang.label] }}
-									</a>
-								</li>
-								<li v-for="(lang, index) in languages.slice(0, -1)" :key="`divider-${index}`"
-									class="divider">
-								</li>
-							</ul>
-						</li>
-
 						<!-- 登录状态 -->
 						<template v-if="isLoggedIn">
 							<li class="user-info">
@@ -146,11 +127,6 @@ export default {
 			this.$store.commit('clearUserInfo')
 			this.$message.success('已退出登录')
 		},
-
-		// 语言切换
-		setLang(lang) {
-			this.$store.commit('setLang', lang)
-		}
 	}
 }
 </script>
