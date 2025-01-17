@@ -163,26 +163,26 @@
 						<div class="item active">
 							<div class="content">
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_1.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_1.jpg'" alt="">
 								</div>
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_2.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_2.jpg'" alt="">
 								</div>
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_3.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_3.jpg'" alt="">
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="content">
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_1.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_1.jpg'" alt="">
 								</div>
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_2.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_2.jpg'" alt="">
 								</div>
 								<div class="items">
-									<img :src="'../../static/img/games/' + initData.gameKey + '_img_3.jpg'" alt="">
+									<img :src="'./static/img/games/' + initData.gameKey + '_img_3.jpg'" alt="">
 								</div>
 							</div>
 						</div>
