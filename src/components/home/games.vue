@@ -42,17 +42,6 @@
 							<div class="info" v-html="v.info[langIndex].substr(0, 150) + '.......'"
 								style="text-aligh:left;"> </div>
 						</router-link>
-
-						<div class="download">
-							<a :href="v.appleURL" target="_blank">
-								<!--<img class="ech-pulse-shrink" src="../../../static/img/app_store.png" alt="">-->
-								<img v-if="v.appleURL" class="" src="../../../static/img/app_store.png" alt="">
-							</a>
-							<a :href="v.googleURL" target="_blank" style="margin-left:5px">
-								<!--<img class="ech-pulse-shrink" src="../../../static/img/google_paly.png" alt="">-->
-								<img v-if="v.googleURL" class="" src="../../../static/img/google_paly.png" alt="">
-							</a>
-						</div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-3 col-md-2  col-lg-2 ">

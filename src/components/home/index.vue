@@ -159,14 +159,14 @@ export default {
     return {
       gamesData: [],
       initData: index,
-      langIndex: Number(localStorage.getItem('currentLangIndex') || '0'), //语言类型index
+      langIndex: '0', //语言类型index
       changeNum: [],
       timeID: ''
     }
   },
   watch: {
     '$store.state.langPack': function () {
-      this.langIndex = Number(localStorage.getItem('currentLangIndex'));
+      this.langIndex = '0';
       // this.initData = {};
       // this.initData = index; //变动数据驱动type语言切换
     }

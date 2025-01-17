@@ -21,11 +21,11 @@ export default new Router({
 			path: '/index',
 			component: index
 		},
-		{//加入我们
-			path: '/careers',
-			name: 'careers',
-			component: careers
-		},
+		// {//加入我们
+		// 	path: '/careers',
+		// 	name: 'careers',
+		// 	component: careers
+		// },
 		{//游戏列表
 			path: '/games',
 			name: 'games',

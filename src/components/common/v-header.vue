@@ -45,6 +45,8 @@
 						<template v-if="isLoggedIn">
 							<li class="user-info">
 								<span>{{ $store.state.userInfo.nickName }}</span>
+								<span style="color: #f74a15; margin-left: 20px;"><i class="fa fa-money"></i>{{
+									$store.state.userInfo.coupon }}</span>
 								<a-button type="link" @click="handleLogout">退出</a-button>
 							</li>
 						</template>
@@ -81,7 +83,7 @@ export default {
 				{ path: '/index', icon: 'fa fa-home', label: 'home' },
 				{ path: '/games', icon: 'fa fa-gamepad', label: 'games' },
 				{ path: '/recharge', icon: 'fa fa-money', label: 'recharge' },
-				{ path: '/careers', icon: 'fa fa-flag', label: 'careers' },
+				// { path: '/careers', icon: 'fa fa-flag', label: 'careers' },
 				{ path: '/about', icon: 'fa fa-user', label: 'about' }
 			],
 			socialLinks: [

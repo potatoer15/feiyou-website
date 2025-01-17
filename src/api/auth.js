@@ -1,4 +1,4 @@
-import request, { sdk } from './request'
+import request, { sdk, qianyu } from './request'
 
 const auth = {
     /**
@@ -51,7 +51,7 @@ const auth = {
      */
     getUserInfoAndCoupon() {
         // 注意：这里需要处理 baseURL 的情况，可以在 request.js 中添加配置支持
-        return request.get('/qianyu/user/info')
+        return request.get(`${qianyu}/user/info`)
     },
 
     /**

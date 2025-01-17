@@ -40,15 +40,6 @@
 
 				</p>
 			</div>
-			<div class="download">
-				<a :href="initData.appleURL" target="_blank">
-					<img v-if="initData.appleURL" class="ech-shake-time" src="../../../static/img/app_store.png" alt="">
-				</a>
-				<a :href="initData.googleURL" target="_blank" style="margin-left:10px">
-					<img v-if="initData.googleURL" class="ech-shake-time" src="../../../static/img/google_paly.png"
-						alt="">
-				</a>
-			</div>
 			<!--嫦娥-->
 			<img class="poster-img  ec-fade-in-r" src="../../../static/img/poster-img.png" alt="">
 		</div>
@@ -269,7 +260,7 @@ export default {
 	},
 	watch: {
 		'$store.state.langPack': function () {
-			this.langIndex = Number(localStorage.getItem('currentLangIndex'));
+			this.langIndex = '0';
 			// console.log(typeof this.langIndex);
 			// this.initData = {};
 			// this.initData = details[this.gameKey]; //变动数据驱动type语言切换

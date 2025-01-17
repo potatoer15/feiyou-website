@@ -55,14 +55,21 @@
                 </div>
             </a-modal>
         </div>
+        <LoginModal :visible.sync="loginVisible" @login-success="handleLoginSuccess" />
     </div>
 </template>
 
 <script>
 import rechargeApi from '@/api/recharge'
+import LoginModal from '../common/LoginModal.vue'
+import { getState } from '../../store/store' // 引入 Vuex 状态管理
+import auth from '@/api/auth'
 
 export default {
     name: 'RechargeDetail',
+    components: {
+        LoginModal
+    },
     data() {
         return {
             gameId: '',
@@ -76,8 +83,9 @@ export default {
             countdown: '',
             paymentUrl: '',
             timer: null,
-            defaultImage: 'https://sdk-webstatic.mihoyo.com/sdk-payment-upload/2025/01/14/2bb54956e1672f78ee3ff07bfef29bc8_434004644719114646.png',
-            countdownTimer: null
+            defaultImage: '../../../static/img/goods_image.png',
+            countdownTimer: null,
+            loginVisible: false, // 登录弹窗的可见性
         }
     },
     async created() {
@@ -145,6 +153,10 @@ export default {
 
         // 处理充值请求
         async handleRecharge(goods) {
+            if (!getState('userInfo.nickName')) { // 检查用户是否登录
+                this.loginVisible = true; // 显示登录弹窗
+                return;
+            }
             try {
                 const order = await rechargeApi.createRechargeOrder(goods.goodsId)
                 const orderPage = await rechargeApi.getOrderPage(
@@ -221,6 +233,13 @@ export default {
                         this.$message.success('支付成功')
                         this.isModalVisible = false
                         // 这里可以添加刷新用户余额等操作
+                        const userinfoAndCoupon = await auth.getUserInfoAndCoupon()
+
+                        // 4. 存储用户信息
+                        this.$store.commit('setUserInfo', {
+                            ...getState('userInfo'),
+                            coupon: userinfoAndCoupon.coupon
+                        })
                     }
                 } catch (error) {
                     console.error('查询订单状态失败:', error)
@@ -244,7 +263,12 @@ export default {
             this.isModalVisible = false
             this.stopPolling()
             this.$message.error('取消支付')
-        }
+        },
+
+        handleLoginSuccess() {
+            this.loginVisible = false; // 登录成功后关闭弹窗
+            this.fetchGoodsList(); // 重新获取商品列表
+        },
     },
     beforeDestroy() {
         this.stopPolling()

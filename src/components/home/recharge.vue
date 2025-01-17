@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             initData: [],
-            langIndex: Number(localStorage.getItem('currentLangIndex') || '0'), //语言类型index
+            langIndex: '0', //语言类型index
         }
     },
     mounted() {
@@ -53,7 +53,7 @@ export default {
     },
     watch: {
         '$store.state.langPack': function () {
-            this.langIndex = Number(localStorage.getItem('currentLangIndex'));
+            this.langIndex = '0'
         }
     },
 }
